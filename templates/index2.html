@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="ko">
+    <meta charset="utf-8">
+
+    <title>Flask Web Scheduler</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <script>
+
+    </script>
+
+    <style>
+        body.opaque-nav nav,
+        nav.opaque {
+            background: #004a7c;
+        }
+
+        .igation>li>a,
+        .igation>li>a:hover,
+        .igation>li>a:visited {
+            color: #fff;
+            position: relative;
+            text-decoration: none;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        .igation {
+            align-items: center;
+            display: flex;
+            flex-flow: row nowrap;
+            font-weight: 400;
+            height: 90px;
+            justify-content: flex-start;
+            margin: 0;
+            overflow: hidden;
+            padding: 0 40px;
+        }
+
+        .igation>li.with-children {
+            border-radius: 2px 2px 0 0 !important;
+            padding: 0 40px 0 20px;
+            position: relative;
+        }
+    </style>
+
+</head>
+
+<body class="opaque-nav">
+    <nav role="navigation">
+        <ul class="igation">
+            <li>
+                <a class="bc-logo" href="/">
+                    <img src="https://www.blockchain.com/Resources/white-blockchain.svg?74931502cdd94f94">
+                </a>
+            </li>
+            <li class="with-children">
+                <a href="/wallet" id="wallet-link">Wallet</a>
+            </li>
+            <li class="with-children">
+                <a href="/" id="nav-data">Data</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container pt-100">
+        <h2> 블록들 리스트</h2>
+
+
+        <h1 style="padding-bottom:10px">블록 #{{k}}</h1>
+
+        <table class="table table-striped" style="margin-top:25px">
+
+            <tbody>
+                <tr>
+                    <th>블록 높이</th>
+                    <th>시각</th>
+                    <th>해시</th>
+                    <th>데이터량(kB)</th>
+                </tr>
+                {% for k in result: %}
+                <tr>
+                    <td><a href="/block?number={{ loop.index0 }}">{{ loop.index0 }}</a></td>
+                    <td>{{k.timestamp}}</td>
+                    <td>{{k.hash}}</a></td>
+                    <td>732.12</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+    </ul>
+
+</body>
+
+</html>

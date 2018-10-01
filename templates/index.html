@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="ko">
+    <meta charset="utf-8">
+
+    <title>Flask Web Scheduler</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <script>
+
+    </script>
+    <style>
+        body.opaque-nav nav,
+        nav.opaque {
+            background: #004a7c;
+        }
+
+        .igation>li>a,
+        .igation>li>a:hover,
+        .igation>li>a:visited {
+            color: #fff;
+            position: relative;
+            text-decoration: none;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        .igation {
+            align-items: center;
+            display: flex;
+            flex-flow: row nowrap;
+            font-weight: 400;
+            height: 90px;
+            justify-content: flex-start;
+            margin: 0;
+            overflow: hidden;
+            padding: 0 40px;
+        }
+
+        .igation>li.with-children {
+            border-radius: 2px 2px 0 0 !important;
+            padding: 0 40px 0 20px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body class="opaque-nav">
+    <nav role="navigation">
+        <ul class="igation">
+            <li>
+                <a class="bc-logo" href="/">
+                    <img src="https://www.blockchain.com/Resources/white-blockchain.svg?74931502cdd94f94">
+                </a>
+            </li>
+            <li class="with-children">
+                <a href="/wallet" id="wallet-link">Wallet</a>
+            </li>
+            <li class="with-children">
+                <a href="/" id="nav-data">Data</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container pt-100">
+        <h1 style="padding-bottom:10px">블록 #{{number}}</h1>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <table class="table table-striped">
+
+                    <tbody>
+                        <tr>
+                            <th colspan="2">요약</th>
+                        </tr>
+                        <tr>
+                            <td>거래 수</td>
+                            <td>{{result.volume}}</td>
+                        </tr>
+                        <tr>
+                            <td>타임 스탬프</td>
+                            <td>{{result.timestamp}}</td>
+                        </tr>
+                        <tr>
+                            <td>난이도</td>
+                            <td>{{result.bits}}</td>
+                        </tr>
+                        <tr>
+                            <td>해시 난수</td>
+                            <td>{{result.hash}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{result.transactions}}
+        <div style="width:100%; clear:both;">
+            <h2>거래</h2>
+            <div id="tx-369086486" class="txdiv">
+                <table class="table table-striped" cellpadding="0" cellspacing="0" style="padding:0px;float:left;margin:0px;width:100%">
+
+                    {% for k in result.transactions: %}
+                    <tbody>
+                        <tr>
+                            <th colspan="3" align="left">
+                                <a class="hash-link" href="">{{k.tx_id}}</a>
+                                <span class="pull-right">
+                                    <span class="hidden-phone">(크기: 186 bytes)</span>
+                                    2018-08-24 00:14:42</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="txtd hidden-phone mobile-f12 stack-mobile">
+                                {% for input in k.inputs %} {% if input.pre_tx_id == None: %}
+                                <b>투입물 없음 (새로 생성 된 동전)</b>
+                                {% else %}
+                                <b>{{input.pre_tx_id}}</b>
+                                {% endif %} {% endfor %}
+                            </td>
+                            <!-- 화살표 구간-->
+                            <td class="hidden-phone tx-arrow-col"><img src="https://www.blockchain.com/Resources/arrow_right_green.png"></td>
+
+                            <td class="txtd mobile-f12 stack-mobile">
+                                {% for output in k.outputs %}
+                                <a>{{output.to}}</a>
+                                <span class="pull-right hidden-phone">
+                                    <span data-c="{{output.value}}" data-time="1535069682000">{{output.value}} BTC</span>
+                                    {% endfor %}
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    </ul>
+
+</body>
+
+</html>
